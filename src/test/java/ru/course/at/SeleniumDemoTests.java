@@ -37,7 +37,7 @@ public class SeleniumDemoTests {
         searchField.submit();
 
         WebElement searchPageField = driver.findElement(By.cssSelector("#sb_form_q"));
-        assertEquals(input, searchPageField.getAttribute("value"));
+        assertEquals(input, searchPageField.getAttribute("value"), "Текст не совпадает");
     }
 
 }

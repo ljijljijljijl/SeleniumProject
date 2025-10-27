@@ -32,11 +32,12 @@ public class SeleniumDemoTests {
     @Test
     public void searchFieldTest() {
         String input = "Selenium";
-        WebElement searchField = driver.findElement(By.cssSelector("#sb_form_q"));
+        By searchFieldCss = By.cssSelector("#sb_form_q");
+        WebElement searchField = driver.findElement(searchFieldCss);
         searchField.sendKeys(input);
         searchField.submit();
 
-        WebElement searchPageField = driver.findElement(By.cssSelector("#sb_form_q"));
+        WebElement searchPageField = driver.findElement(searchFieldCss);
         assertEquals(input, searchPageField.getAttribute("value"), "Текст не совпадает");
     }
 

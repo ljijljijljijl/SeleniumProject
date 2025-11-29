@@ -40,5 +40,4 @@ public class SeleniumDemoTests {
         WebElement searchPageField = driver.findElement(searchFieldCss);
         assertEquals(input, searchPageField.getAttribute("value"), "Текст не совпадает");
     }
-
 }

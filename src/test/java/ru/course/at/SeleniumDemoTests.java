@@ -52,6 +52,7 @@ public class SeleniumDemoTests {
     @Test
     public void resultsLinkTest() {
         String input = "Selenium";
+        String seleniumUrl = "https://www.selenium.dev/";
         By searchFieldCss = By.cssSelector("#sb_form_q");
         By relevantLink = By.xpath("//a[contains(@class, 'tilk')]//cite[contains(., 'selenium.dev')]");
         WebElement searchField = driver.findElement(searchFieldCss);
@@ -66,7 +67,8 @@ public class SeleniumDemoTests {
         wait.until(ExpectedConditions.numberOfWindowsToBe(2));
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         if (tabs.size() > 1) driver.switchTo().window(tabs.get(1));
-        wait.until(ExpectedConditions.urlToBe("https://www.selenium.dev/"));
-        assertEquals("https://www.selenium.dev/", driver.getCurrentUrl(), "Адрес страницы не совпадает с ожидаемым");
+        wait.until(ExpectedConditions.urlToBe(seleniumUrl));
+        assertEquals(seleniumUrl, driver.getCurrentUrl(),
+                "Адрес страницы не совпадает с ожидаемым");
     }
 }

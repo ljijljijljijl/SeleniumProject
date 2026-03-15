@@ -7,24 +7,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static ru.course.at.MyWait.myWait;
 
 public class SeleniumDemoTests {
 
-    private WebDriver driver;
-    String input = "Selenium";
-    By searchFieldCss = By.cssSelector("input[class*='search-input']");
-    String seleniumUrl = "https://www.selenium.dev/";
-
-    public void clickElement(List<WebElement> searchResults, int num) {
-        searchResults.get(num).click();
-    }
+    private static WebDriver driver;
 
     @BeforeEach
     public void setUp() {
@@ -37,6 +29,18 @@ public class SeleniumDemoTests {
     @AfterEach
     public void tearDown() {
         driver.quit();
+    }
+
+    String input = "Selenium";
+    By searchFieldCss = By.cssSelector("input[class*='search-input']");
+    String seleniumUrl = "https://www.selenium.dev/";
+
+    public void clickElement(List<WebElement> searchResults, int num) {
+        searchResults.get(num).click();
+    }
+
+    public static WebDriver getDriver() {
+        return driver;
     }
 
     @Test
@@ -57,8 +61,7 @@ public class SeleniumDemoTests {
         searchField.sendKeys(input);
         searchField.submit();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(6));
-        wait.until(ExpectedConditions.elementToBeClickable(relevantLink));
+        myWait(6).clickable(relevantLink);
         List<WebElement> searchResults = driver.findElements(relevantLink);
         clickElement(searchResults, 0);
 
